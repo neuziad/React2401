@@ -41,30 +41,43 @@ const ColorForm = () => {
   };
 
   return (
-    <div>
+    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', justifyContent: 'center'}}>
       <form onSubmit={handleSubmit}>
-        {Object.keys(hexColors).map((part) => (
-          <div key={part}>
-            <label>
-              {part.charAt(0).toUpperCase() + part.slice(1)}:
-              <HexColorPicker color={hexColors[part]} onChange={(color) => handleColorChange(color, part)} />
-              <input
-                type="text"
-                name={part}
-                value={hexColors[part]}
-                onChange={handleChange}
-              />
-            </label>
-          </div>
-        ))}
-        <button type="submit">Generate Code</button>
-      </form>
-      {generatedCode && (
-        <div>
-          <h2>Generated Code</h2>
-          <pre>{generatedCode}</pre>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', justifyContent: 'left', margin: '3rem' }}>
+          {Object.keys(hexColors).map((part, index) => (
+            <div key={part} style={{ display: 'grid', justifyContent: 'left' }}>
+              <label style={{ display: 'grid', justifyContent: 'left' }}>
+                {part.charAt(0).toUpperCase() + part.slice(1)}:
+                <HexColorPicker
+                  color={hexColors[part]}
+                  onChange={(color) => handleColorChange(color, part)}
+                  style={{ margin: '1rem' }}
+                />
+                <input
+                  type="text"
+                  name={part}
+                  value={hexColors[part]}
+                  onChange={handleChange}
+                  style={{ margin: 'auto' }}
+                />
+              </label>
+            </div>
+          ))}
         </div>
-      )}
+        <button type="submit" style={{ fontSize: '1.5rem' }}>Generate Code</button>
+      </form>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(1, 1fr)' }}>
+        <h2 style={{ textAlign: 'center', marginBottom: '-6%' }}>Generated Code</h2>
+        {generatedCode && (
+          <div style={{ gridColumn: '1' }}>
+            <textarea
+              style={{ width: '100%', height: '450px', resize: 'none' }}
+              value={generatedCode}
+              readOnly
+            />
+          </div>
+        )}
+      </div>
     </div>
   );
 };
