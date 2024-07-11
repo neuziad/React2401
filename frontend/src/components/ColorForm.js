@@ -1,14 +1,16 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { HexColorPicker } from 'react-colorful';
 
 const ColorForm = () => {
   const [hexColors, setHexColors] = useState({
-    hat: '',
-    overalls: '',
-    gloves: '',
-    shoes: '',
-    face: '',
-    hair: ''
+    // Default Mario colors
+    hat: '#7F0000',
+    overalls: '#00007F',
+    gloves: '#7F7F7F',
+    shoes: '#390E07',
+    face: '#7F603C',
+    hair: '#390300'
   });
   const [generatedCode, setGeneratedCode] = useState('');
 
@@ -17,6 +19,13 @@ const ColorForm = () => {
     setHexColors({
       ...hexColors,
       [name]: value
+    });
+  };
+
+  const handleColorChange = (color, part) => {
+    setHexColors({
+      ...hexColors,
+      [part]: color.toUpperCase()
     });
   };
 
@@ -38,6 +47,7 @@ const ColorForm = () => {
           <div key={part}>
             <label>
               {part.charAt(0).toUpperCase() + part.slice(1)}:
+              <HexColorPicker color={hexColors[part]} onChange={(color) => handleColorChange(color, part)} />
               <input
                 type="text"
                 name={part}
