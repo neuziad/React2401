@@ -41,11 +41,11 @@ const ColorForm = () => {
   };
 
   return (
-    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', justifyContent: 'center'}}>
+    <div className="m-plus-1p-regular" style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', justifyContent: 'center'}}>
       <form onSubmit={handleSubmit}>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', justifyContent: 'left', margin: '3rem' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', justifyContent: 'left', margin: '4rem' }}>
           {Object.keys(hexColors).map((part, index) => (
-            <div key={part} style={{ display: 'grid', justifyContent: 'left' }}>
+            <div key={part} style={{ display: 'grid', justifyContent: 'left', marginBottom: index < 3 ? '1.5rem' : '0' }}>
               <label style={{ display: 'grid', justifyContent: 'left' }}>
                 {part.charAt(0).toUpperCase() + part.slice(1)}:
                 <HexColorPicker
@@ -67,16 +67,14 @@ const ColorForm = () => {
         <button type="submit" style={{ fontSize: '1.5rem' }}>Generate Code</button>
       </form>
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(1, 1fr)' }}>
-        <h2 style={{ textAlign: 'center', marginBottom: '-6%' }}>Generated Code</h2>
-        {generatedCode && (
-          <div style={{ gridColumn: '1' }}>
-            <textarea
-              style={{ width: '100%', height: '450px', resize: 'none' }}
-              value={generatedCode}
-              readOnly
-            />
-          </div>
-        )}
+        <h2 className="m-plus-1p-regular" style={{ textAlign: 'center' }}>Generated Code</h2>
+        <div style={{ gridColumn: '1' }}>
+          <textarea
+            style={{ width: '80%', height: '550px', resize: 'none' }}
+            value={generatedCode}
+            readOnly
+          />
+        </div>
       </div>
     </div>
   );
