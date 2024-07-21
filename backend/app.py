@@ -136,4 +136,4 @@ def generate():
     return jsonify({"code": codes.strip()})
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=False)
